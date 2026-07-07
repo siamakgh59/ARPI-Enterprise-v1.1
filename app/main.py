@@ -3,9 +3,11 @@ from app.api import router
 
 app = FastAPI(
     title="ARPI Enterprise",
-    "version":"1.1.1-TEST"
-    description="Advanced Risk Prediction Intelligence"
+    version="1.1.1-TEST",
+    description="Advanced Risk Prediction Intelligence System"
 )
+
+app.include_router(router)
 
 app.include_router(router)
 
