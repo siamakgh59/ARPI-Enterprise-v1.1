@@ -2,37 +2,77 @@ import yfinance as yf
 from datetime import datetime
 
 
-def get_price(symbol):
+def get_market_data(symbol):
+
     try:
         ticker = yf.Ticker(symbol)
-        data = ticker.history(period="1d", interval="1m")
+
+        data = ticker.history(
+            period="2d",
+            interval="1m"
+        )
 
         if data.empty:
-            return None
+            return {
+                "price": None,
+                "change": None,
+                "status": "NO_DATA"
+            }
 
-        return round(float(data["Close"].iloc[-1]), 2)
+        price = float(data["Close"].iloc[-1])
+
+        previous = float(data["Close"].iloc[0])
+
+        change = ((price - previous) / previous) * 100
+
+        return {
+            "price": round(price,2),
+            "change_percent": round(change,2),
+            "status": "LIVE"
+        }
+
 
     except Exception:
-        return None
+
+        return {
+            "price": None,
+            "change_percent": None,
+            "status": "ERROR"
+        }
+
 
 
 def market_snapshot():
 
     return {
-        "timestamp": datetime.utcnow().isoformat(),
 
-        "gold": get_price("GC=F"),
-        "silver": get_price("SI=F"),
+        "timestamp":
+        datetime.utcnow().isoformat(),
 
-        "brent": get_price("BZ=F"),
-        "wti": get_price("CL=F"),
+        "gold":
+        get_market_data("GC=F"),
 
-        "bitcoin": get_price("BTC-USD"),
-        "ethereum": get_price("ETH-USD"),
+        "silver":
+        get_market_data("SI=F"),
 
-        "eurusd": get_price("EURUSD=X"),
+        "brent":
+        get_market_data("BZ=F"),
 
-        "dxy": get_price("DX-Y.NYB"),
+        "wti":
+        get_market_data("CL=F"),
 
-        "vix": get_price("^VIX")
+        "bitcoin":
+        get_market_data("BTC-USD"),
+
+        "ethereum":
+        get_market_data("ETH-USD"),
+
+        "eurusd":
+        get_market_data("EURUSD=X"),
+
+        "dxy":
+        get_market_data("DX-Y.NYB"),
+
+        "vix":
+        get_market_data("^VIX")
     }
