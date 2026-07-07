@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from app.api import router
-print("ROUTER COUNT:", len(router.routes))
+
+print("LOADED ROUTES:", [route.path for route in router.routes])
 
 app = FastAPI(
     title="ARPI Enterprise",
