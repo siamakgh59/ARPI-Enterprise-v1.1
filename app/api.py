@@ -27,3 +27,9 @@ def health():
         "status": "ok",
         "engine": "ARPI Enterprise"
     }
+
+@router.get("/arpi-test")
+def arpi_test():
+    return {
+        "message": "NEW API LOADED"
+    }
