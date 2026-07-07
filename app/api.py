@@ -6,7 +6,10 @@ router = APIRouter()
 
 @router.get("/market")
 def market():
-    return market_snapshot()
+    return {
+        "test": "NEW_API",
+        "data": market_snapshot()
+    }
 
 
 @router.get("/market/live")
