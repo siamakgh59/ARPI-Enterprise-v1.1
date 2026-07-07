@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.api import router
+print("ROUTER COUNT:", len(router.routes))
 
 app = FastAPI(
     title="ARPI Enterprise",
