@@ -9,13 +9,10 @@ app = FastAPI(
 
 app.include_router(router)
 
-app.include_router(router)
-
-
 @app.get("/")
 def root():
     return {
-        "project": "ARPI",
-        "version": "1.1.0",
-        "status": "running"
+        "status": "online",
+        "version": "1.1.1-TEST",
+        "system": "ARPI Enterprise"
     }
