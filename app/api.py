@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from app.market import market_snapshot
 
 router = APIRouter()
-
+print("ARPI API ROUTER LOADED - NEW VERSION")
 
 @router.get("/market")
 def market():
@@ -11,7 +11,11 @@ def market():
         "data": market_snapshot()
     }
 
-
+@router.get("/api-test")
+def api_test():
+    return {
+        "status": "API ROUTER ACTIVE"
+    }
 @router.get("/market/live")
 def market_live():
     return {
