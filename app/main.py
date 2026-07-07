@@ -9,6 +9,7 @@ app = FastAPI(
 
 app.include_router(router)
 
+
 @app.get("/")
 def root():
     return {
